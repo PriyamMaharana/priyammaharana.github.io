@@ -1,2732 +1,642 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Priyam Maharana — Data Analyst</title>
-  <meta name="description" content="Priyam Maharana — Data Analyst. Portfolio: Python, SQL, ETL, Data Dashboards." />
-  <meta property="og:title" content="Priyam Maharana — Data Analyst" />
-  <meta property="og:description" content="Data Analyst portfolio showcasing projects, skills and contact." />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-    :root{
-      --bg:#0b0f14;
-      --card:rgba(15,23,32,0.6);
-      --muted:#9aa6b2;
-      --accent:#6c7cff;
-      --radius:14px;
-      --glass: rgba(255,255,255,0.03);
-      --max-w:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;padding:0;font-family:'Poppins',sans-serif;}
-    body{
-      background:linear-gradient(270deg, #0f172a, #1e293b, #0f172a);
-      background-size:600% 600%;
-      animation: bgMove 18s ease infinite;
-      color:#e6eef6; line-height:1.6;
-      -webkit-font-smoothing:antialiased;
-    }
-    @keyframes bgMove {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    a{color:var(--accent); text-decoration:none;transition:color 0.2s}
-    a:hover{color:#aab6ff}
-    .container{max-width:var(--max-w); margin:0 auto; padding:28px;}
-    h1,h2,h3,strong{letter-spacing:0.5px}
-    h1{font-size:2.2rem}
-    p.lead{color:var(--muted); font-size:1.05rem}
-
-    /* Updated Navbar */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        backdrop-filter:blur(8px);
-        background:rgba(11,15,20,0.6);
-        border-bottom:1px solid rgba(255,255,255,0.03);
-        z-index: 100;
-        animation: fadeDown 0.6s ease forwards;
-    }
-    @keyframes fadeDown {
-        from {transform:translateY(-100%);opacity:0;}
-        to {transform:translateY(0);opacity:1;}
-    }
-    .navbar-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 24px;
-        height: 78px;
-    }
-    
-    .nav-left {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        justify-content: center;
-    }
-    
-    .brand {
-        font-weight: 700;
-        font-size: 1.18rem;
-        letter-spacing: 0.3px;
-        line-height: 1.2;
-    }
-    
-    .tagline {
-        color: #b0bed2;
-        font-size: 0.80rem;
-        font-weight: 400;
-        letter-spacing: 0.1px;
-        line-height: 1.1;
-        margin-top: -2px;
-    }
-    
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 24px;
-    }
-    
-    .nav-links {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-    
-    .nav-links a {
-        position:relative; color:var(--muted);
-        font-size:14px; padding:8px;
-        border-radius:8px;
-        transition: 0.3s;
-        text-decoration: none;
-    }
-    
-    .nav-links a:hover {
-        color: #ededed;
-    }
-    
-    .nav-links a.active {
-        color: #ffffff;
-    }
-
-    .nav-links a::after{
-        content:''; position:absolute; bottom:0; left:0;
-        width:0%; height:2px; background:var(--accent);
-        transition:width 0.3s ease;
-      }
-    .nav-links a:hover::after{width:100%}
-    main{padding-top:88px}
-    section{padding:40px 0; animation:fadeUp 0.8s ease forwards}
-    @keyframes fadeUp {
-        from {opacity:0; transform:translateY(20px);}
-        to {opacity:1; transform:translateY(0);}
-    }
-    
-    .admin-btn {
-        background: linear-gradient(135deg, #6366f1 15%, #8b5cf6 50%, #d946ef 100%);
-        color: white;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.25s ease, transform 0.22s, color 0.22s;
-        box-shadow: 0 2px 10px rgba(108,124,255,0.18);
-        height: 34px;
-    }
-    
-    .admin-btn:hover {
-        transform: translateY(-1px) scale(1.03);
-        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
-        background: linear-gradient(135deg, #5255fd 0%, #813bf9 50%, #be1fd3 100%);
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-        .navbar-container {
-        padding: 6px 16px;
-        height: 50px;
-        }
-        
-        .nav-right {
-        gap: 16px;
-        }
-        
-        .nav-links {
-        gap: 4px;
-        }
-        
-        .nav-links a {
-        padding: 6px 12px;
-        font-size: 13px;
-        }
-        
-        .brand {
-        font-size: 1rem;
-        }
-        
-        .tagline {
-        font-size: 0.7rem;
-        }
-        
-        .admin-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-        height: 28px;
-        }
-    }
-    
-    @media (max-width: 640px) {
-        .navbar-container {
-        flex-direction: column;
-        gap: 12px;
-        padding: 12px 16px;
-        height: auto;
-        }
-        
-        .nav-right {
-        width: 100%;
-        justify-content: center;
-        }
-        
-        .nav-links a {
-        padding: 6px 10px;
-        font-size: 12px;
-        }
-    }
-
-    .card{
-      background:var(--card);
-      backdrop-filter: blur(14px);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.4);
-      border:1px solid rgba(255,255,255,0.06);
-      transition:transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 12px 28px rgba(0,0,0,0.6);
-    }
-    .visitor-note {
-        margin-top: 20px !important;
-        padding-top: 12px;
-        border-top: 1px solid rgba(255,255,255,0.05);
-    }    
-    .hero{display:flex; gap:25px; align-items:center; justify-content:space-between}
-    .hero-left{max-width:640px; animation:fadeSlide 1s ease;}
-    .hero-cta {
-        display: flex;
-        gap: 16px;
-        margin-bottom: 24px;
-        flex-wrap: wrap;
-    }
-    .hero-cta a {
-        display: inline-block;
-    }
-    
-    @keyframes fadeSlide{
-      from{opacity:0; transform:translateX(-20px);}
-      to{opacity:1; transform:translateX(0);}
-    }
-    img.profile{
-      width:200px;height:200px;
-      border-radius:50%;
-      object-fit:cover;
-      border:3px solid rgba(255,255,255,0.1);
-      box-shadow:0 6px 14px rgba(0,0,0,0.5);
-      animation:popIn 0.8s ease;
-    }
-    @keyframes popIn{
-      0%{transform:scale(0.8); opacity:0;}
-      100%{transform:scale(1); opacity:1;}
-    }
-    button{
-      background:linear-gradient(45deg,var(--accent),#9c8cff);
-      color:white; border:0;
-      padding:10px 16px; border-radius:10px;
-      font-weight:600; cursor:pointer;
-      transition: all 0.25s ease;
-    }
-    button:hover{
-      transform:scale(1.05);
-      box-shadow:0 4px 12px rgba(108,124,255,0.4);
-    }
-    button.ghost{
-      background:transparent; border:1px solid rgba(255,255,255,0.2);
-      color:var(--muted);
-    }
-    button.ghost:hover{color:#fff;border-color:var(--accent)}
-    
-    .projects-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(350px,1fr)); gap:24px}
-    
-    .tag{
-      display:inline-block; padding:6px 10px;
-      border-radius:8px; font-size:12px;
-      background:rgba(255,255,255,0.05);
-      color:var(--muted);
-    }
-    footer{padding:30px 0; text-align:center; color:var(--muted); font-size:15px;}
-
-    @media (max-width:880px){
-      .hero{flex-direction:column; align-items:flex-start}
-      img.profile{width:120px;height:120px;}
-    }
-
-    /* Contact Card Layout */
-    .contact-card {
-        background: var(--card);
-        backdrop-filter: blur(14px);
-        border-radius: var(--radius);
-        padding: 0;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-        border: 1px solid rgba(255,255,255,0.06);
-        width: 100%;
-        margin: 0 auto;
-        overflow: hidden;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .contact-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 28px rgba(0,0,0,0.6);
-    }
-    
-    .contact-content {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        min-height: 500px;
-    }
-    
-    .form-section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 40px 30px;
-    }
-    
-    .form-section h2 {
-        color: #ffffff;
-        font-size: 2rem;
-        margin: 0 0 20px 0;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-align: left;
-    }
-    
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 17px;
-    }
-    
-    .contact-field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-    
-    .contact-field label {
-        color: #a3abb9;
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 2px;
-        margin-left: 2px;
-    }
-    
-    .contact-field input, .contact-field textarea {
-        background: rgba(255,255,255,0.08);
-        border: 1.5px solid rgba(116,136,255,0.17);
-        color: #e6eef6;
-        border-radius: 9px;
-        padding: 11px 13px;
-        font-size: 15.5px;
-        margin-bottom: 0;
-        transition: border 0.21s, box-shadow 0.2s;
-        resize: none;
-    }
-    
-    .contact-field input:focus, .contact-field textarea:focus {
-        border-color: #838fff;
-        box-shadow: 0 0 0 2.5px #6c7cff33;
-        outline: none;
-    }
-    
-    .contact-field textarea {
-        min-height: 110px;
-        max-height: 270px;
-        resize: vertical;
-    }
-
-    .contact-field.error input, .contact-field.error textarea {
-        border-color: #ef4444;
-        box-shadow: 0 0 0 2.5px #ef444433;
-    }
-
-    .error-message {
-        color: #ef4444;
-        font-size: 12px;
-        margin-top: 4px;
-    }
-    
-    .contact-submit-row {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    
-    .contact-submit {
-        background: linear-gradient(90deg,#6c7cff 60%,#88aaff 100%);
-        color: #fff;
-        padding: 12px 32px;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: 700;
-        transition: all 0.18s;
-        letter-spacing: 0.2px;
-        box-shadow: 0 4px 18px rgba(80,90,155,0.07);
-        border: none;
-        cursor: pointer;
-        min-width: 160px;
-    }
-    
-    .contact-submit:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-    
-    .contact-submit:hover:not(:disabled) {
-        background: linear-gradient(90deg,#7f8cff 70%,#b4c1ff 100%);
-        color: #fff;
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 10px 32px rgba(108,124,255,0.14);
-    }
-    
-    .social-section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 30px;
-        text-align: center;
-    }
-    
-    .social-section h3 {
-        color: #ffffff;
-        font-size: 1.3rem;
-        margin: 0 0 16px 0;
-        font-weight: 600;
-    }
-    
-    .social-section p {
-        color: #e6eef6;
-        font-size: 15px;
-        line-height: 1.5;
-        margin: 0 0 8px 0;
-    }
-    
-    .follow-text {
-        color: #94a3b8;
-        font-size: 13px;
-        font-weight: 400;
-        display: block;
-        margin-bottom: 24px;
-    }
-    
-    .social-links-vertical {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        align-items: center;
-    }
-    
-    .vertical-divider {
-        width: 1px;
-        background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0),
-        rgba(108, 124, 255, 0.4) 50%,
-        rgba(255, 255, 255, 0)
-        );
-        margin: 20px 0;
-    }
-
-    .social-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 20px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.25s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        width: 140px;
-        justify-content: center;
-    }
-    
-    .social-chip.github {
-        background: rgba(88, 166, 255, 0.1);
-        color: #58a6ff;
-        border-color: rgba(88, 166, 255, 0.2);
-    }
-    
-    .social-chip.github:hover {
-        background: rgba(88, 166, 255, 0.2);
-        color: #ffffff;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(88, 166, 255, 0.15);
-    }
-    
-    .social-chip.linkedin {
-        background: rgba(10, 102, 194, 0.1);
-        color: #0a66c2;
-        border-color: rgba(10, 102, 194, 0.2);
-    }
-    
-    .social-chip.linkedin:hover {
-        background: rgba(10, 102, 194, 0.2);
-        color: #ffffff;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(10, 102, 194, 0.15);
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-        .contact-content {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
-        }
-        
-        .vertical-divider {
-        width: 80px;
-        height: 1px;
-        background: linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0),
-            rgba(108, 124, 255, 0.4) 50%,
-            rgba(255, 255, 255, 0)
-        );
-        margin: 0 auto;
-        justify-self: center;
-        }
-        
-        .form-section, .social-section {
-        padding: 25px 20px;
-        }
-
-        .form-section h2 {
-        text-align: center;
-        }
-        
-        .social-links-vertical {
-        flex-direction: row;
-        justify-content: center;
-        }
-        
-        .social-chip {
-        width: auto;
-        min-width: 120px;
-        }
-    }
-    
-    @media (max-width: 600px) {
-        .contact-submit {
-        width: 100%;
-        min-width: auto;
-        }
-        
-        .form-section, .social-section {
-        padding: 20px 15px;
-        }
-    }
-
-    /* Advanced Project Cards */
-    .project-card-advanced {
-        background: var(--card);
-        backdrop-filter: blur(14px);
-        border-radius: var(--radius);
-        overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-        border: 1px solid rgba(255,255,255,0.06);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        max-width: 350px;
-        margin: 0 auto;
-    }
-      
-    .project-card-advanced:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 16px 40px rgba(0,0,0,0.6);
-    }
-
-    /* Updated Featured Badge - Top Right */
-    .featured-badge {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffd700 100%);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4), 0 0 20px rgba(255, 215, 0, 0.3);
-        z-index: 4;
-        animation: featuredGlow 2s ease-in-out infinite alternate;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    @keyframes featuredGlow {
-        from {
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4), 0 0 20px rgba(255, 215, 0, 0.3);
-        }
-        to {
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6), 0 0 30px rgba(255, 215, 0, 0.5);
-            transform: scale(1.05);
-        }
-    }
-
-    /* Different colors for different badge types */
-    .feature-badge.new {
-        background: linear-gradient(130deg, #3b82f6 0%, #1d4ed8 100%);
-    }
-
-    .feature-badge.hot {
-        background: linear-gradient(130deg, #fc4949 0%, #ba1717 100%);
-    }
-
-    .feature-badge.trending {
-        background: linear-gradient(130deg, #fbae29 0%, #d97706 100%);
-    }
-
-    .feature-badge.popular {
-        background: linear-gradient(130deg, #9468fa 0%, #7c3aed 100%);
-    }
-
-    .feature-badge.updated {
-        background: linear-gradient(130deg, #06b6d4 0%, #16839f 100%);
-    }
-    .feature-badge.featured {
-        background: linear-gradient(130deg, #3dee40 0%, #0ca714 100%);
-    }
-
-    .feature-badge.beta {
-        background: linear-gradient(130deg, #fa60f2 0%, #ad2aad 100%);
-    }
-
-    .feature-badge.premium {
-        background: linear-gradient(130deg, #e0f40c 0%, #fbff00 100%);
-    }
-
-    /* Feature Badges Container - Left Side, Horizontal Row */
-    .feature-badges-container {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        display: flex;
-        flex-direction: row;
-        gap: 6px;
-        z-index: 2;
-    }
-
-    .feature-badge {
-        color: white;
-        padding: 4px 10px;
-        border-radius: 16px;
-        font-size: 10px;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(171, 181, 178, 0.3);
-        white-space: nowrap;
-        min-width: 50px;
-        text-align: center;
-        flex-shrink: 0;
-    }
-
-    .feature-badge:nth-child(3),
-    .feature-badge:nth-child(4) {
-        top: auto;
-    }
-
-    /* Projects section card styling */
-    #projects .container.card {
-        padding: 28px;
-    }
-
-    #projects .projects-grid {
-        margin-top: 0;
-    }
-
-    /* Adjust project cards spacing inside container */
-    #projects .project-card-advanced {
-        background: rgba(25, 35, 45, 0.8); /* Slightly different from main container */
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    #projects .project-card-advanced:hover {
-        background: rgba(30, 40, 50, 0.9);
-    }
-
-
-    /* Project Image Section */
-      .project-image-section {
-        position: relative;
-        height: 140px;
-        overflow: hidden;
-      }
-      
-      .project-image-section img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-      }
-      
-      .project-card-advanced:hover .project-image-section img {
-        transform: scale(1.05);
-      }
-      
-      .project-placeholder {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .placeholder-icon {
-        font-size: 2.5rem;
-        opacity: 0.6;
-      }
-      
-      .project-content-section {
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        position: relative;
-      }
-      
-      .project-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 10px;
-      }
-      
-      .projects-grid {
-        display: grid; 
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-        gap: 18px;
-        max-width: 100%;
-      }
-      
-      .project-title {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #ffffff;
-        margin: 0;
-        line-height: 1.2;
-        flex: 1;
-        padding-right: 8px;
-      }
-      
-      .project-date {
-        color: var(--muted);
-        font-size: 0.75rem;
-        white-space: nowrap;
-      }
-      
-      .project-description {
-        color: #cbd5e1;
-        font-size: 12px;
-        line-height: 1.4;
-        margin: 0 0 12px 0;
-        flex-grow: 1;
-        
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: calc(1.4em * 3);
-    }
-      
-      .project-tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-        margin-bottom: 16px;
-      }
-      
-      .tech-tag {
-        background: rgba(108, 124, 255, 0.1);
-        color: #a5b4fc;
-        border: 1px solid rgba(108, 124, 255, 0.2);
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 10px;
-        font-weight: 500;
-      }
-
-      /* Corner Icons Container - Below Tech Stack, Right Side */
-      .project-corner-icons {
-        position: absolute;
-        bottom: 70px;
-        right: 15px;
-        display: flex;
-        gap: 3px;
-        z-index: 3;
-        opacity: 0.5;
-      }
-
-      .corner-icon-btn {
-        width: 32px;
-        height: 32px;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-      }
-
-      .corner-icon-btn:hover {
-        background: rgba(24, 29, 35, 0.9);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-      }
-
-      .corner-icon-svg {
-        width: 16px;
-        height: 16px;
-        fill: #ffffff;
-        transition: all 0.3s ease;
-      }
-
-      .corner-icon-btn:hover .corner-icon-svg {
-        fill: #ffffff;
-        transform: scale(1.1);
-      }
-
-      .github-corner-btn:hover {
-        background: rgba(24, 29, 35, 0.9);
-        border-color: rgba(88, 166, 255, 0.4);
-      }
-
-      .details-corner-btn:hover {
-        background: rgba(139, 92, 246, 0.2);
-        border-color: rgba(139, 92, 246, 0.4);
-      }
-      
-      .project-metrics {
-        display: flex;
-        justify-content: space-between;
-        padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        margin-top: auto;
-      }
-      
-      .metric {
-        text-align: center;
-        flex: 1;
-      }
-      
-      .metric-value {
-        font-size: 1rem;
-        font-weight: 700;
-        color: var(--accent);
-        line-height: 1.2;
-      }
-      
-      .metric-label {
-        font-size: 9px;
-        color: var(--muted);
-        margin-top: 1px;
-        font-weight: 500;
-      }
-      
-      /* Mobile Responsive */
-      @media (max-width: 768px) {
-        .project-image-section {
-          height: 100px;
-        }
-        
-        .project-content-section {
-          padding: 12px;
-        }
-        
-        .project-title {
-          font-size: .9rem;
-        }
-        
-        .project-metrics {
-          gap: 5px;
-        }
-
-        .project-card-advanced {
-            max-width: 100%;
-         }
-
-        .projects-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .project-corner-icons {
-          bottom: 54px;
-          right: 12px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .projects-grid {
-          grid-template-columns: 1fr;
-          gap: 14px;
-        }
-        
-        .project-image-section {
-          height: 90px;
-        }
-        
-        .project-content-section {
-          padding: 10px;
-        }
-      }
-
-    /* Project Details Modal */
-    .project-details-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(12,16,28,0.2);
-        backdrop-filter: blur(2px);
-        display: none;
-        z-index: 200;
-        padding-top: 70px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-bottom: 20px;
-        overflow: auto;
-        transition: background 0.4s;
-        animation: overlayFade 0.9s;
-    }
-
-    .project-details-overlay.open {
-        display: block;
-    }
-
-    .project-details-panel {
-        background: rgba(25, 26, 26, 0.84);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        border: 1.5px solid rgba(154,166,210,0.19);
-        box-shadow: 0 16px 55px rgba(70,90,210,0.12), 0 2px 8px rgba(0,0,0,0.08);
-        padding: 30px;
-        max-width: 900px;
-        width: 100%;
-        margin: 0 auto;
-        animation: slideDown 0.5s cubic-bezier(.22,1.02,.43,1.08);
-    }
-
-    .project-details-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 24px;
-        padding-bottom: 16px;
-        border-bottom: 1.5px solid rgba(255,255,255,0.09);
-    }
-
-    .project-details-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #ffffff;
-        margin: 0;
-        flex: 1;
-    }
-
-    .project-details-date {
-        color: var(--muted);
-        font-size: 0.9rem;
-        margin-left: 16px;
-    }
-
-    .close-details-btn {
-        background: linear-gradient(90deg, #fad0c4 0%, #ffd1ff 100%);
-        color: #354;
-        font-weight: 600;
-        border: none;
-        margin-top: 10px;
-        padding: 8px 16px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .close-details-btn:hover {
-        background: linear-gradient(90deg,#fdc2e0 20%,#fcf8e8 100%);
-        color: #222;
-        transform: translateY(-1px);
-    }
-
-    .project-details-content {
-        display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 30px;
-        margin-bottom: 24px;
-    }
-
-    .project-details-main {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .project-details-sidebar {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .project-details-image {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .project-details-placeholder {
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        opacity: 0.6;
-    }
-
-    .project-details-description {
-        background: rgba(255,255,255,0.05);
-        border-radius: 12px;
-        padding: 20px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .project-details-description h3 {
-        color: #ffffff;
-        margin: 0 0 12px 0;
-        font-size: 1.1rem;
-    }
-
-    .project-details-description p {
-        color: #cbd5e1;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    .project-info-card {
-        background: rgba(255,255,255,0.05);
-        border-radius: 12px;
-        padding: 16px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .project-info-card h4 {
-        color: #ffffff;
-        margin: 0 0 12px 0;
-        font-size: 1rem;
-    }
-
-    .project-tech-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .project-features-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .feature-chip {
-        background: rgba(16, 185, 129, 0.2);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.3);
-        padding: 4px 10px;
-        border-radius: 16px;
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .project-link-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
-        color: #ffffff;
-        padding: 12px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        justify-content: center;
-    }
-
-    .project-link-btn:hover {
-        background: linear-gradient(135deg, #2f363d 0%, #24292e 100%);
-        transform: translateY(-2px);
-        color: #ffffff;
-    }
-
-    /* Mobile Responsive for Modal */
-    @media (max-width: 768px) {
-        .project-details-content {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        
-        .project-details-panel {
-            padding: 20px;
-            margin: 5px auto;
-        }
-        
-        .project-details-header {
-            flex-direction: column;
-            gap: 12px;
-            align-items: flex-start;
-        }
-    }
-      
-    /* Admin Overlay */
-    .overlay {
-      position: fixed; 
-      inset: 0;
-      background: rgba(12,16,28,0.63);
-      backdrop-filter: blur(4px);
-      display: none;
-      z-index: 99;
-      padding-top: 70px;
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-bottom: 20px;
-      overflow: auto;
-      transition: background 0.4s;
-      animation: overlayFade 0.9s;
-    }
-    .overlay.open {display:block}
-    
-    @keyframes overlayFade {from { opacity: 0; }to { opacity: 1; }}
-    
-    .admin-panel {
-      background: rgba(41, 44, 56, 0.82);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1.5px solid rgba(154,166,210,0.19);
-      box-shadow: 0 16px 55px rgba(70,90,210,0.12), 0 2px 8px rgba(0,0,0,0.08);
-      padding: 30px 30px 22px 30px;
-      max-width: 1010px; 
-      width: 100%;
-      margin: 0 auto;
-      margin-top: 10px;
-      animation: slideDown 0.5s cubic-bezier(.22,1.02,.43,1.08);
-    }
-
-    @keyframes slideDown {
-      0% { 
-        opacity: 0; 
-        transform: translateY(-20px);
-      }
-      100% { 
-        opacity: 1; 
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width:600px) {
-      .admin-panel {
-        max-width: 97vw;
-        margin: 5px auto;
-        padding: 20px 15px;
-      }
-      
-      .overlay {
-        padding-top: 60px;
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-    }
-
-    .panel-head {display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px;border-bottom:1.5px solid rgba(255,255,255,0.09); padding-bottom:8px;}
-    .admin-panel [data-tab] {background: none; border:none; color:var(--muted);font-size:15px; padding:8px 18px; border-radius:9px;cursor:pointer; transition: background 0.18s, color 0.24s;font-weight: 500;margin-right: 2px;}
-    .admin-panel [data-tab].active, .admin-panel [data-tab]:focus {background:linear-gradient(90deg, #7e80fe 10%, #d49cff 90%);color: #fff; box-shadow: 0 6px 12px rgba(108,124,255,0.10);outline:none; border:none;}
-    .admin-panel [data-tab]:hover {background:rgba(108,124,255,0.13); color:#fff;}
-    #panelContent > div[data-panel] {animation: fadeUp 0.34s;}
-    
-    .admin-panel input, .admin-panel textarea, .admin-panel select {
-      background: rgba(255,255,255,0.08);
-      border: 1.5px solid rgba(108,124,255,0.18);
-      color: #e6eef6;
-      padding:12px 14px;
-      border-radius:10px;
-      margin-bottom:12px;
-      transition: border 0.23s, box-shadow 0.18s, background 0.2s;
-      font-size:15px;
-      width:100%;
-      font-family: 'Poppins', sans-serif;
-    }
-    .admin-panel input:focus, .admin-panel textarea:focus, .admin-panel select:focus {
-      border-color:#7e80fe;
-      background: rgba(255,255,255,0.12);
-      box-shadow: 0 0 0 3px #7e80fe25;
-      outline: none;
-    }
-    .admin-panel textarea {
-      min-height:90px;
-      resize:vertical;
-    }
-    .admin-panel label {
-      color: #a7b8d8; 
-      margin-top:18px; 
-      margin-bottom:6px;
-      font-size:14px; 
-      font-weight:600;
-      display:block;
-    }
-    
-    .admin-panel button, .admin-panel .ghost {background: linear-gradient(90deg, #6c7cff 55%, #c471f5 100%);color:#fff;border-radius:8px;border:none;box-shadow: 0 2px 10px rgba(108,124,255,0.07);font-weight:600;transition: background 0.24s, transform 0.22s, color 0.22s;padding:10px 18px;font-size:15px;margin-top:5px;}
-    .admin-panel .ghost {background: rgba(142,142,198,0.04);border: 1.5px solid rgba(120,130,230,0.12);color: #d6d9ee;}
-    .admin-panel button:hover, .admin-panel .ghost:hover {background: linear-gradient(90deg, #c471f5 0%, #6c7cff 100%);color:#fff;transform: translateY(-1px) scale(1.04);box-shadow: 0 6px 24px rgba(108,124,255,0.18);}
-    .admin-panel table {width:100%; border-radius: 12px; border-collapse:separate; border-spacing:0 5px;background:none;}
-    .admin-panel table th, .admin-panel table td {color: #aac4f8; background:rgba(60,70,100,0.10);font-size: 14px; padding:8px 10px;border-bottom:1.5px solid rgba(255,255,255,0.08);}
-    .admin-panel table th { font-weight:600;}
-    .admin-panel table tr:last-child td { border-bottom:none; }
-    .admin-panel .small.muted {color:#b9b9db}
-    
-    .insert-fields-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 18px 24px;
-      background: rgba(70,80,110,0.12);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 24px;
-      box-shadow: 0 3px 14px rgba(50,60,110,0.08);
-    }
-
-    .insert-field {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 0;
-    }
-
-    .insert-field label {
-      color: #b7c8ea;
-      font-size: 13px;
-      font-weight: 500;
-      margin-bottom: 8px;
-      opacity: 0.94;
-    }
-
-    .insert-field input, .insert-field textarea {
-      width: 100%;
-      font-size: 15px;
-      padding: 12px 14px;
-      margin-bottom: 0;
-      background: rgba(255,255,255,0.10);
-      border: 1.5px solid rgba(108,124,255,0.18);
-      border-radius: 8px;
-      color: #e6eef6;
-      transition: border 0.23s, box-shadow 0.18s;
-    }
-
-    .insert-field input:focus, .insert-field textarea:focus {
-      border-color: #7e80fe;
-      box-shadow: 0 0 0 2px #7e80fe25;
-      outline: none;
-    }
-
-    .insert-btn {
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: center;
-      margin-top: 8px;
-    }
-
-    .insert-btn button {
-      min-width: 200px;
-      font-size: 15px;
-      padding: 12px 24px;
-      background: linear-gradient(90deg,#6c7cff 60%,#a68cff 100%);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
-
-    .insert-btn button:hover {
-      background: linear-gradient(90deg,#a68cff 60%,#6c7cff 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(108,124,255,0.3);
-    }
-
-    @media (max-width: 760px) {
-      .insert-fields-row { 
-        grid-template-columns: 1fr; 
-        gap: 14px;
-        padding: 16px;
-      }
-      .insert-btn button { 
-        min-width: 100%; 
-      }
-    }
-
-    .content-form-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px 24px;
-        margin-bottom: 20px;
-    }
-    
-    .content-field {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0;
-    }
-    
-    .content-field.full-width {
-        grid-column: 1 / -1;
-    }
-    
-    .content-field label {
-        color: #a7b8d8;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 8px;
-        display: block;
-    }
-    
-    .content-field input,
-    .content-field textarea {
-        background: rgba(255,255,255,0.08);
-        border: 1.5px solid rgba(108,124,255,0.18);
-        color: #e6eef6;
-        padding: 12px 14px;
-        border-radius: 10px;
-        margin-bottom: 0;
-        transition: border 0.23s, box-shadow 0.18s, background 0.2s;
-        font-size: 15px;
-        width: 100%;
-        font-family: 'Poppins', sans-serif;
-    }
-    
-    .content-field input:focus,
-    .content-field textarea:focus {
-        border-color: #7e80fe;
-        background: rgba(255,255,255,0.12);
-        box-shadow: 0 0 0 3px #7e80fe25;
-        outline: none;
-    }
-    
-    .content-field textarea {
-        min-height: 90px;
-        resize: vertical;
-    }
-    
-    .content-save-btn {
-        grid-column: 1 / -1;
-        display: flex;
-        justify-content: center;
-        margin-top: 15px;
-    }
-    
-    .content-save-btn button {
-        min-width: 200px;
-        padding: 12px 24px;
-    }
-    
-    @media (max-width: 760px) {
-        .content-form-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-        }
-        .content-field.full-width {
-        grid-column: 1;
-        }
-        .content-save-btn button {
-        min-width: 100%;
-        }
-    }
-
-    .message {
-      padding: 12px;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      font-size: 14px;
-      display: none;
-    }
-
-    .message.success {
-      background: rgba(34, 197, 94, 0.1);
-      border: 1px solid rgba(34, 197, 94, 0.2);
-      color: #4ade80;
-    }
-
-    .message.error {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      color: #f87171;
-    }
-
-    #logoutBtn {display:none;background: linear-gradient(90deg, #fc466b, #3f5efb);color:#fff !important;font-weight:600;border-radius:7px;margin-right:0;margin-left:6px;padding: 9px 17px;font-size:15px;box-shadow: 0 3px 12px rgba(200,80,100,0.06);transition: background 0.19s, box-shadow 0.24s, color 0.18s;}
-    #logoutBtn:hover {background: linear-gradient(90deg, #e66767 60%, #3760fa 100%);color: #fff;box-shadow: 0 7px 20px rgba(250,80,120,0.10);}
-    #closeAdmin {background: linear-gradient(90deg, #fad0c4 0%, #ffd1ff 100%);color: #354;font-weight:600;}
-    #closeAdmin:hover {background: linear-gradient(90deg,#fdc2e0 20%,#fcf8e8 100%);color:#222;}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - PriyamMaharana</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
 </head>
+
 <body>
-  <header>
-    <div class="navbar-container">
-      <div class="nav-left">
-        <div class="brand">Priyam Maharana</div>
-        <div class="tagline">Data Analyst • Python & SQL</div>
-      </div>
-      <div class="nav-right">
-        <div class="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
+
+    <!-- PROGRESS BAR -->
+    <div id="progress-bar"></div>
+
+    <!-- BACK TO TOP -->
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">PriyamMaharana<span>.</span></div><!-- EDIT: your name -->
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certs</a></li>
+            <li><a href="#github">GitHub</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+            <a href="#contact" class="nav-cta">Hire Me</a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <button class="admin-btn" id="openAdmin">Admin</button>
-      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#about" onclick="closeMobileMenu()">About</a>
+        <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+        <a href="#experience" onclick="closeMobileMenu()">Experience</a>
+        <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+        <a href="#certifications" onclick="closeMobileMenu()">Certifications</a>
+        <a href="#github" onclick="closeMobileMenu()">GitHub</a>
+        <a href="#contact" onclick="closeMobileMenu()">Contact</a>
     </div>
-  </header>
 
-  <main>
-    <section id="home">
-      <div class="container card hero">
-        <div class="hero-left">
-          <h1 id="homeTitle">Hi, I'm Priyam Maharana</h1>
-          <p class="lead" id="homeTag">Final-year MCA student specializing in data analytics, Python, and SQL.</p>
-          <div class="hero-cta">
-            <a href="resume.pdf" download><button>Download Resume</button></a>
-            <a href="#projects"><button class="ghost">View Projects</button></a>
-          </div>
-          <p class="muted small visitor-note" id="visitorNote">Visitors: <span id="visCount">0</span></p>
-        </div>
-        <div style="min-width:200px; display:flex; justify-content:center; align-items:center">
-          <img class="profile" id="profileImage" src="" alt="profile image" onerror="this.style.display='none'">
-        </div>
-      </div>
-    </section>
-    <section id="about">
-      <div class="container card">
-        <div class="row">
-          <div class="col">
-            <h2>About Me</h2>
-            <p class="lead" id="aboutBio">I am a data analyst with hands-on experience in Python, SQL, and analytics libraries like Pandas and NumPy. I have built real-world projects, including ETL pipelines and file converters, to clean, process, and analyze datasets. My goal is to apply analytical skills to solve problems and drive data-informed decisions.</p>
-            <p class="muted">Education: MCA (Final-year)</p>
-            <p class="muted">Skills: Python, SQL, Pandas, NumPy, ETL, Data Visualization</p>
-          </div>
-          <div style="width:260px">
-            <div class="card" style="padding:14px">
-              <h3 style="margin:0">Quick Info</h3>
-              <p class="small muted" id="aboutExperience">Experience: Projects & internships</p>
-              <p class="small muted" id="aboutLocation">Location: India</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section id="projects">
-      <div class="container card">
-        <h2 style="margin-bottom:24px">Projects</h2>
-        <div class="projects-grid" id="projectsGrid">
-          <!-- dynamic projects -->
-        </div>
-      </div>
-    </section>
-    
-    <section id="contact">
-        <div class="container">
-          <div class="contact-card">
-            <div class="contact-content">
-              <div class="form-section">
-                <h2>Contact</h2>
-                <form id="contactForm" class="contact-form">
-                  <div class="contact-field">
-                    <label for="cname">Your Name</label>
-                    <input id="cname" placeholder="Enter your name" required />
-                    <div class="error-message" id="cnameError"></div>
-                  </div>
-                  <div class="contact-field">
-                    <label for="cemail">Your Email</label>
-                    <input id="cemail" type="email" placeholder="example@email.com" required />
-                    <div class="error-message" id="cemailError"></div>
-                  </div>
-                  <div class="contact-field">
-                    <label for="csubject">Subject</label>
-                    <input id="csubject" placeholder="Subject (optional)" />
-                  </div>
-                  <div class="contact-field">
-                    <label for="cmessage">Message</label>
-                    <textarea id="cmessage" placeholder="Type your message..." required></textarea>
-                    <div class="error-message" id="cmessageError"></div>
-                  </div>
-                  <div class="contact-submit-row">
-                    <button class="contact-submit" type="submit">Send Message</button>
-                  </div>
-                </form>
-              </div>
-      
-              <div class="vertical-divider"></div>
-      
-              <div class="social-section">
-                <h3>Let's Connect!</h3>
-                <p>Visit my portfolio projects and connect with me for collaboration opportunities.</p>
-                <span class="follow-text">Follow me on GitHub & LinkedIn</span>
-                
-                <div class="social-links-vertical">
-                  <a href="https://github.com/PriyamMaharana" target="_blank" class="social-chip github" rel="noopener" aria-label="GitHub">
-                    <span>🐱 GitHub</span>
-                  </a>
-                  <a href="https://linkedin.com/in/priyammaharana" target="_blank" class="social-chip linkedin" rel="noopener" aria-label="LinkedIn">
-                    <span>💼 LinkedIn</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>    
-  </main>
-  <footer>
-    <div class="container">
-      © <span id="year"></span> •  Priyam Maharana
-    </div>
-  </footer>
-
-  <!-- ADMIN OVERLAY -->
-  <div id="adminOverlay" class="overlay" aria-hidden="true">
-    <div class="admin-panel card" role="dialog" aria-modal="true" aria-label="Admin Panel">
-      <div class="panel-head">
-        <div>
-          <strong>Admin Panel</strong>
-          <div class="small muted">Manage content, view visitors & messages</div>
-        </div>
-        <div style="display:flex; gap:8px; align-items:center">
-          <div class="muted small" id="adminUser">Not signed in</div>
-          <button id="logoutBtn" style="display:none"><span style="margin-right:4px" aria-hidden="true">🚪</span>Logout</button>
-          <button id="closeAdmin">Close</button>
-        </div>
-      </div>
-      <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap" id="adminTabs">
-        <button class="ghost" data-tab="content">🏠 Content</button>
-        <button class="ghost" data-tab="projects">🗂 Projects</button>
-        <button class="ghost" data-tab="messages">✉️ Messages</button>
-        <button class="ghost" data-tab="insights">📊 Insights</button>
-        <button class="ghost" data-tab="settings">⚙️ Settings</button>
-      </div>
-      <div id="panelContent">
-        <div data-panel="content">
-            <h3>Home & About Content</h3>
-            <div class="message" id="contentMessage"></div>
-            <div class="content-form-grid">
-            <div class="content-field">
-                <label for="editHomeTitle">Home Title</label>
-                <input id="editHomeTitle" placeholder="Hi, I'm Your Name" />
-            </div>
-            <div class="content-field">
-                <label for="editHomeTag">Home Tagline</label>
-                <input id="editHomeTag" placeholder="Your professional tagline" />
-            </div>
-            <div class="content-field full-width">
-                <label for="editAboutBio">About Bio</label>
-                <textarea id="editAboutBio" placeholder="Write your professional bio..."></textarea>
-            </div>
-            <div class="content-field">
-                <label for="editAboutExp">Experience Text</label>
-                <input id="editAboutExp" placeholder="Projects & internships" />
-            </div>
-            <div class="content-field">
-                <label for="editProfileURL">Profile Image URL (optional)</label>
-                <input id="editProfileURL" placeholder="https://example.com/photo.jpg" />
-            </div>
-            <div class="content-save-btn">
-                <button id="saveContent">Save Changes</button>
-            </div>
-            </div>
-        </div>
-
-        <div style="display:none" data-panel="projects">
-            <h3>Projects</h3>
-            <div class="message" id="projectMessage"></div>
-            <div class="insert-fields-row">
-            <!-- Row 1: Title + Image + GitHub -->
-            <div class="insert-field">
-                <label for="pTitle">Project Title</label>
-                <input id="pTitle" placeholder="Enter project title" />
-            </div>
-            <div class="insert-field">
-                <label for="pImage">Image URL</label>
-                <input id="pImage" placeholder="https://example.com/image.jpg" />
-            </div>
-            <div class="insert-field">
-                <label for="pGithubLink">GitHub Repository</label>
-                <input id="pGithubLink" placeholder="https://github.com/username/repo" />
-            </div>
-            
-            <!-- Row 2: Tech Stack + Features -->
-            <div class="insert-field">
-                <label for="pStack">Tech Stack</label>
-                <input id="pStack" placeholder="Python, SQL, Pandas" />
-            </div>
-            <div class="insert-field">
-                <label for="pFeatures">Features (comma separated)</label>
-                <input id="pFeatures" placeholder="featured, new, trending, popular" />
-                <small style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
-                Available: featured, new, trending, popular, hot, updated, beta, premium
-                </small>
-            </div>
-            
-            <!-- Row 3: Description (Full Width) -->
-            <div class="insert-field" style="grid-column: 1 / -1;">
-                <label for="pDescription">Project Description</label>
-                <textarea id="pDescription" placeholder="Describe your project in detail..." style="min-height: 80px;"></textarea>
-            </div>
-            
-            <!-- Row 4: Metrics -->
-            <div class="insert-field">
-                <label for="pPerformance">Performance Metric</label>
-                <input id="pPerformance" placeholder="99.9%" />
-                <small style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
-                e.g., 99.9%, 95.5%, etc.
-                </small>
-            </div>
-            <div class="insert-field">
-                <label for="pRecords">Records Metric</label>
-                <input id="pRecords" placeholder="1M+" />
-                <small style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
-                e.g., 1M+, 500K, 10TB, etc.
-                </small>
-            </div>
-            <div class="insert-field">
-                <label for="pAutomation">Automation Metric</label>
-                <input id="pAutomation" placeholder="100%" />
-                <small style="color: #94a3b8; font-size: 12px; margin-top: 4px;">
-                e.g., 100%, 85%, Fully Automated, etc.
-                </small>
-            </div>
-            
-            <!-- Row 5: Add Button (Full Width) -->
-            <div class="insert-btn">
-                <button id="addProject">+ Add Project</button>
-            </div>
-            </div>
-            
+    <!-- ══ HERO — V1 STYLE ══ -->
+    <section class="hero" id="home">
+        <div class="hero-grid">
+            <!-- LEFT COLUMN -->
             <div>
-            <table id="projectsTable">
-                <thead><tr><th>Title</th><th>Stack</th><th>Features</th><th>Metrics</th><th>Actions</th></tr></thead>
-                <tbody></tbody>
-            </table>
-            </div>
-        </div>
-  
-        <div style="display:none" data-panel="messages">
-          <h3>Messages</h3>
-          <table>
-            <thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>When</th><th>Message</th><th>Actions</th></tr></thead>
-            <tbody id="messagesList"></tbody>
-          </table>
-        </div>
-
-        <div style="display:none" data-panel="insights">
-          <h3>Insights</h3>
-          <div style="display:flex; gap:12px; flex-wrap:wrap">
-            <div class="card" style="min-width:180px;">
-              <div class="small muted">Total Visits</div>
-              <div id="insTotal" style="font-size:20px;font-weight:700">0</div>
-            </div>
-            <div class="card" style="min-width:180px;">
-              <div class="small muted">Visits (7 days)</div>
-              <div id="ins7" style="font-size:20px;font-weight:700">0</div>
-            </div>
-            <div class="card" style="min-width:180px;">
-              <div class="small muted">Visits (30 days)</div>
-              <div id="ins30" style="font-size:20px;font-weight:700">0</div>
-            </div>
-            <div class="card" style="min-width:220px;">
-              <div class="small muted">Most visited section</div>
-              <div id="insMost" style="font-size:16px;font-weight:700">—</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="display:none" data-panel="settings">
-          <h3>Settings</h3>
-          <div class="message" id="settingsMessage"></div>
-          <label>Admin password (change)</label>
-          <input id="setPassword" type="password" placeholder="new password" />
-          <div style="margin-top:15px"><button id="savePassword">Save Password</button></div>
-          <div style="margin-top:14px" class="muted small">Note: This is stored in localStorage for demo only. For production use a backend.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PROJECT DETAILS OVERLAY -->
-  <div id="projectDetailsOverlay" class="project-details-overlay" aria-hidden="true">
-    <div class="project-details-panel" role="dialog" aria-modal="true" aria-label="Project Details">
-      <div class="project-details-header">
-        <div>
-          <h2 class="project-details-title" id="detailsTitle">Project Title</h2>
-          <div class="project-details-date" id="detailsDate">Date</div>
-        </div>
-        <button id="closeProjectDetails" class="close-details-btn">Close</button>
-      </div>
-      
-      <div class="project-details-content">
-        <div class="project-details-main">
-          <div id="detailsImageContainer">
-            <!-- Image will be inserted here -->
-          </div>
-          
-          <div class="project-details-description">
-            <h3>Project Description</h3>
-            <p id="detailsDescription">Full project description will appear here...</p>
-          </div>
-        </div>
-        
-        <div class="project-details-sidebar">
-          <div class="project-info-card">
-            <h4>Technologies Used</h4>
-            <div class="project-tech-list" id="detailsTechStack">
-              <!-- Tech stack will be inserted here -->
-            </div>
-          </div>
-          
-          <div class="project-info-card">
-            <h4>Features & Labels</h4>
-            <div class="project-features-list" id="detailsFeatures">
-              <!-- Features will be inserted here -->
-            </div>
-          </div>
-
-          <div class="project-info-card">
-            <h4>Project Metrics</h4>
-            <div id="detailsMetrics">
-              <!-- Metrics will be inserted here -->
-            </div>
-          </div>
-          
-          <div class="project-info-card">
-            <h4>Repository</h4>
-            <a id="detailsGithubLink" class="project-link-btn" target="_blank">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              View on GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const LS = {
-      KEY_CONTENT: 'pf_content_v1',
-      KEY_PROJECTS: 'pf_projects_v1',
-      KEY_MESSAGES: 'pf_messages_v1',
-      KEY_VISITS: 'pf_visits_v1',
-      KEY_SECTION_STATS: 'pf_section_stats_v1',
-      KEY_ADMIN_PASS: 'pf_admin_pass_v1'
-    };
-    
-    const defaultContent = {
-      tagline: "Data Analyst • Python & SQL",
-      homeTitle: "Hi, I'm Priyam Maharana",
-      homeTag: "Final-year MCA student specializing in data analytics, Python, and SQL.",
-      aboutBio: "I am a data analyst with hands-on experience in Python, SQL, and analytics libraries like Pandas and NumPy. I have built real-world projects, including ETL pipelines and file converters, to clean, process, and analyze datasets. My goal is to apply analytical skills to solve problems and drive data-informed decisions.",
-      aboutExp: "Projects & internships",
-      profileURL: ""
-    };
-
-    // FIXED: Global variable to track edit mode
-    let currentEditingProjectId = null;
-
-    function saveJSON(key, val){ localStorage.setItem(key, JSON.stringify(val)); }
-    function loadJSON(key, fallback){
-      try{ 
-        const v = localStorage.getItem(key); 
-        return v ? JSON.parse(v) : fallback;
-      }
-      catch(e){ 
-        console.error('Error loading JSON:', e);
-        return fallback;
-      }
-    }
-    function cryptoRandom(){ return Math.random().toString(36).slice(2,9) }
-    function escapeHtml(s){ 
-      if(!s) return ''; 
-      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-    }
-
-    if(!localStorage.getItem(LS.KEY_CONTENT)) saveJSON(LS.KEY_CONTENT, defaultContent);
-    if(!localStorage.getItem(LS.KEY_PROJECTS)) saveJSON(LS.KEY_PROJECTS, [
-        { 
-        id: cryptoRandom(), 
-        title: "Advanced Sales Analytics ETL Pipeline", 
-        description: "Engineered a comprehensive ETL pipeline processing 1M+ records daily with automated data validation, real-time monitoring, and ML-powered anomaly detection.",
-        image: "", 
-        stack: ["Python", "Apache Airflow", "Pandas", "PostgreSQL", "Docker"], 
-        githubLink: "https://github.com/PriyamMaharana/sales-etl-pipeline", 
-        features: ["featured", "trending"],
-        metrics: {
-          performance: "99.9%",
-          records: "1M+",
-          automation: "100%"
-        },
-        created: Date.now() 
-        },
-        { 
-        id: cryptoRandom(), 
-        title: "Real-time Weather Dashboard", 
-        description: "Built interactive dashboards for business intelligence with real-time data streaming and advanced analytics capabilities.",
-        image: "",
-        stack: ["Python", "Plotly", "Streamlit", "MongoDB"], 
-        githubLink: "https://github.com/PriyamMaharana/data-dashboard", 
-        features: ["new"],
-        metrics: {
-          performance: "95.5%",
-          records: "500K",
-          automation: "85%"
-        },
-        created: Date.now() - 86400000 
-        }
-    ]);
-  
-    if(!localStorage.getItem(LS.KEY_MESSAGES)) saveJSON(LS.KEY_MESSAGES, []);
-    if(!localStorage.getItem(LS.KEY_VISITS)) saveJSON(LS.KEY_VISITS, []);
-    if(!localStorage.getItem(LS.KEY_SECTION_STATS)) saveJSON(LS.KEY_SECTION_STATS, {home:0, about:0, projects:0, contact:0});
-    if(!localStorage.getItem(LS.KEY_ADMIN_PASS)) localStorage.setItem(LS.KEY_ADMIN_PASS, btoa("admin123"));
-    
-    const yearEl = document.getElementById('year');
-    const visCountEl = document.getElementById('visCount');
-    const profileImage = document.getElementById('profileImage');
-    
-    function showMessage(elementId, message, type = 'success') {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      
-      el.textContent = message;
-      el.className = `message ${type}`;
-      el.style.display = 'block';
-      
-      setTimeout(() => {
-        el.style.display = 'none';
-      }, 4000);
-    }
-
-    function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    }
-
-    function validateForm(formData) {
-      const errors = {};
-      
-      if (!formData.name || formData.name.length < 2) {
-        errors.name = 'Name must be at least 2 characters';
-      }
-      
-      if (!formData.email || !validateEmail(formData.email)) {
-        errors.email = 'Please enter a valid email address';
-      }
-      
-      if (!formData.message || formData.message.length < 10) {
-        errors.message = 'Message must be at least 10 characters';
-      }
-      
-      return errors;
-    }
-
-    function showFieldError(fieldId, message) {
-      const field = document.getElementById(fieldId);
-      const errorEl = document.getElementById(fieldId + 'Error');
-      
-      if (field && errorEl) {
-        field.closest('.contact-field').classList.add('error');
-        errorEl.textContent = message;
-      }
-    }
-
-    function clearFieldErrors() {
-      document.querySelectorAll('.contact-field.error').forEach(field => {
-        field.classList.remove('error');
-      });
-      document.querySelectorAll('.error-message').forEach(error => {
-        error.textContent = '';
-      });
-    }
-    
-    function renderContent(){
-      const c = loadJSON(LS.KEY_CONTENT, defaultContent);
-      document.querySelector('.tagline').textContent = c.tagline || "Data Analyst • Python & SQL";
-      document.getElementById('homeTitle').textContent = c.homeTitle;
-      document.getElementById('homeTag').textContent = c.homeTag;
-      document.getElementById('aboutBio').textContent = c.aboutBio;
-      document.getElementById('aboutExperience').textContent = "Experience: " + (c.aboutExp || '');
-      if(c.profileURL){ 
-        profileImage.src = c.profileURL; 
-        profileImage.style.display='block';
-        profileImage.onerror = function() { this.style.display='none'; };
-      } else {
-        profileImage.style.display='none';
-      }
-    }
-    
-    function renderProjects(){
-        const arr = loadJSON(LS.KEY_PROJECTS, []);
-        const grid = document.getElementById('projectsGrid'); 
-        if (!grid) return;
-        
-        grid.innerHTML='';
-        const tableBody = document.querySelector('#projectsTable tbody'); 
-        if(tableBody) tableBody.innerHTML='';
-        
-        if (arr.length === 0) {
-          grid.innerHTML = '<div class="card" style="text-align:center; padding:40px;"><p class="muted">No projects yet. Add some from the Admin panel!</p></div>';
-          return;
-        }
-        
-        arr.forEach((p, index) => {
-          const el = document.createElement('div'); 
-          el.className = 'project-card-advanced';
-          
-          const features = p.features || [];
-          const isFeatured = features.includes('featured');
-          const metrics = p.metrics || { performance: "99.9%", records: "1M+", automation: "100%" };
-          
-          el.innerHTML = `
-            <div class="project-image-section">
-              ${p.image ? `<img src="${p.image}" alt="${escapeHtml(p.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'project-placeholder\\'><div class=\\'placeholder-icon\\'>📊</div></div>'">` : 
-                `<div class="project-placeholder">
-                  <div class="placeholder-icon">📊</div>
-                </div>`}
-              ${isFeatured ? '<div class="featured-badge">⭐ Featured</div>' : ''}
-                ${features.filter(f => f !== 'featured').length > 0 ? 
-                `<div class="feature-badges-container">
-                    ${features.filter(f => f !== 'featured').map(feature => 
-                    `<div class="feature-badge ${feature.toLowerCase()}">${escapeHtml(feature)}</div>`
-                    ).join('')}
-                </div>` : ''}
-
-            </div>
-            <div class="project-content-section">
-              <div class="project-header">
-                <h3 class="project-title">${escapeHtml(p.title)}</h3>
-                <div class="project-date">${new Date(p.created).toLocaleDateString()}</div>
-              </div>
-              <p class="project-description">${escapeHtml(p.description || 'A comprehensive data analysis project showcasing modern analytics workflows and best practices.')}</p>
-              
-              <div class="project-tech-stack">
-                ${(p.stack || []).map(tech => `<span class="tech-tag">${escapeHtml(tech)}</span>`).join('')}
-              </div>
-
-              <div class="project-corner-icons">
-                <button class="corner-icon-btn details-corner-btn" onclick="openProjectDetails('${p.id}')" title="View Details">
-                  <svg class="corner-icon-svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
-                  </svg>
-                </button>
-                <a href="${p.githubLink || '#'}" target="_blank" class="corner-icon-btn github-corner-btn" ${!p.githubLink || p.githubLink === '#' ? 'onclick="event.preventDefault(); alert(\'GitHub link not available\');"' : ''} title="View on GitHub">
-                  <svg class="corner-icon-svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                  </svg>
-                </a>
-              </div>
-              
-              <div class="project-metrics">
-                <div class="metric">
-                  <div class="metric-value">${escapeHtml(metrics.performance)}</div>
-                  <div class="metric-label">Performance</div>
+                <div class="hero-tag"><span class="pulse"></span>Available for Opportunities</div>
+                <!-- EDIT: this is the main hero heading -->
+                <h1>Aspiring<br /><span>Data Engineer</span><br />&amp; ETL Developer</h1>
+                <!-- EDIT: update this line to match your background -->
+                <p class="hero-desc">
+                    MCA graduate with hands-on experience in building data pipelines, ETL workflows, and SQL-based data
+                    transformation using Python and SQL Server.
+                </p>
+                <div class="hero-btns">
+                    <a href="#projects" class="btn-primary">View My Work ↓</a>
+                    <a href="#contact" class="btn-outline">Contact Me</a>
                 </div>
-                <div class="metric">
-                  <div class="metric-value">${escapeHtml(metrics.records)}</div>
-                  <div class="metric-label">Records</div>
+                <div class="hero-stats">
+                    <div>
+                        <div class="stat-num">8.1</div>
+                        <div class="stat-label">MCA CGPA</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">4+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">2025</div>
+                        <div class="stat-label">Graduated</div>
+                    </div>
+                    <div>
+                        <div class="stat-num">2</div>
+                        <div class="stat-label">Internship</div>
+                    </div>
                 </div>
-                <div class="metric">
-                  <div class="metric-value">${escapeHtml(metrics.automation)}</div>
-                  <div class="metric-label">Automation</div>
-                </div>
-              </div>
             </div>
-          `;
-          grid.appendChild(el);
-          
-          if(tableBody){
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${escapeHtml(p.title)}</td>
-              <td>${escapeHtml((p.stack||[]).join(', '))}</td>
-              <td>${escapeHtml((p.features||[]).join(', '))}</td>
-              <td>${escapeHtml(`${metrics.performance} | ${metrics.records} | ${metrics.automation}`)}</td>
-              <td>
-                <button class="ghost" onclick="editProject('${p.id}')" style="margin-right:8px;">Edit</button>
-                <button class="ghost" onclick="deleteProject('${p.id}')" style="background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2);color:#f87171;">Delete</button>
-              </td>`;
-            tableBody.appendChild(tr);
-          }
-        });
-    }
-    
-    // Project Details Modal Functions
-    function openProjectDetails(projectId) {
-      const projects = loadJSON(LS.KEY_PROJECTS, []);
-      const project = projects.find(p => p.id === projectId);
-      
-      if (!project) {
-        alert('Project not found');
-        return;
-      }
-      
-      document.getElementById('detailsTitle').textContent = project.title;
-      document.getElementById('detailsDate').textContent = new Date(project.created).toLocaleDateString();
-      document.getElementById('detailsDescription').textContent = project.description || 'No description available.';
-      
-      const imageContainer = document.getElementById('detailsImageContainer');
-      if (project.image) {
-        imageContainer.innerHTML = `<img src="${project.image}" alt="${escapeHtml(project.title)}" class="project-details-image" onerror="this.parentElement.innerHTML='<div class=\\'project-details-placeholder\\'>📊</div>'">`;
-      } else {
-        imageContainer.innerHTML = '<div class="project-details-placeholder">📊</div>';
-      }
-      
-      const techContainer = document.getElementById('detailsTechStack');
-      techContainer.innerHTML = (project.stack || []).map(tech => 
-        `<span class="tech-tag">${escapeHtml(tech)}</span>`
-      ).join('');
-      
-      const featuresContainer = document.getElementById('detailsFeatures');
-      if (project.features && project.features.length > 0) {
-        featuresContainer.innerHTML = project.features.map(feature => 
-          `<span class="feature-chip">${escapeHtml(feature)}</span>`
-        ).join('');
-      } else {
-        featuresContainer.innerHTML = '<span class="feature-chip">No features</span>';
-      }
-      
-      const metricsContainer = document.getElementById('detailsMetrics');
-      const metrics = project.metrics || { performance: "99.9%", records: "1M+", automation: "100%" };
-      metricsContainer.innerHTML = `
-        <div class="project-metrics">
-          <div class="metric">
-            <div class="metric-value">${escapeHtml(metrics.performance)}</div>
-            <div class="metric-label">Performance</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">${escapeHtml(metrics.records)}</div>
-            <div class="metric-label">Records</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">${escapeHtml(metrics.automation)}</div>
-            <div class="metric-label">Automation</div>
-          </div>
+            <!-- RIGHT COLUMN — V1 card, no GitHub embed -->
+            <div class="hero-card">
+                <div class="hero-card-title">Core Tech Stack</div>
+                <div class="tech-pill-grid">
+                    <span class="tech-pill">SQL Server</span>
+                    <span class="tech-pill">T-SQL</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Pandas</span>
+                    <span class="tech-pill">SCD Type 2</span>
+                    <span class="tech-pill">CDC</span>
+                    <span class="tech-pill">SSIS</span>
+                    <span class="tech-pill">SSMS</span>
+                    <span class="tech-pill">ETL Pipelines</span>
+                    <span class="tech-pill">Data Modeling</span>
+                    <span class="tech-pill">Rest APIs</span>
+                    <span class="tech-pill">Power BI</span>
+                    <span class="tech-pill">Git</span>
+                </div>
+                <hr class="hero-card-divider" />
+                <div class="current-work">
+                    <!-- EDIT: update what you're currently building -->
+                    <strong>Currently Building</strong>
+                    Incremental data pipeline using Change Data Capture (CDC) with Python and SQL Server — focused on
+                    data warehouse design patterns.
+                </div>
+            </div>
         </div>
-      `;
-      
-      const githubLink = document.getElementById('detailsGithubLink');
-      if (project.githubLink && project.githubLink !== '#') {
-        githubLink.href = project.githubLink;
-        githubLink.style.display = 'flex';
-      } else {
-        githubLink.style.display = 'none';
-      }
-      
-      const overlay = document.getElementById('projectDetailsOverlay');
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
+    </section>
 
-    function closeProjectDetails() {
-      const overlay = document.getElementById('projectDetailsOverlay');
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
+    <!-- ABOUT -->
+    <section class="about" id="about">
+        <div class="section-inner">
+            <div class="section-label reveal">About Me</div>
+            <div class="section-title reveal">Who I Am &amp; <span>What I Do ?</span></div>
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="about-text">
+                        <!-- EDIT: write your own about me -->
+                        <p style="text-align: center;">I'm a M.C.A graduate with a strong foundation in data engineering
+                            concepts, database systems,
+                            and Python programming. I'm passionate about building efficient data pipelines and working
+                            with structured data to solve real
+                            business problems.</p>
+                        <p style="text-align: center;">During my internship, I worked as an SQL &amp; ETL Developer
+                            where I gained hands-on experience with data extraction,
+                            transformation, and loading workflows using SQL Server and Python scripting.</p>
+                        <p style="text-align: center;">I'm currently focused on deepening my expertise in ETL
+                            development, SCD patterns, and data warehouse concepts — actively
+                            seeking Junior Data Engineering or ETL Developer opportunities.</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="about-highlights">
+                        <!-- EDIT: fill in your real university, company, city -->
+                        <div class="highlight-item reveal reveal-delay-1">
+                            <div class="hi-icon">🎓</div>
+                            <div class="hi-text"><strong>MCA — Master of Computer Applications</strong>Graduated Nov
+                                2025 · 8.1 CGPA · TJohn College</div>
+                        </div>
+                        <div class="highlight-item reveal reveal-delay-2">
+                            <div class="hi-icon">💼</div>
+                            <div class="hi-text"><strong>SQL &amp; ETL Developer Intern</strong>Hands-on experience with
+                                SQL Server, data transformation &amp; ETL workflows</div>
+                        </div>
+                        <div class="highlight-item reveal reveal-delay-3">
+                            <div class="hi-icon">⚙️</div>
+                            <div class="hi-text"><strong>Currently Building</strong>SCD Type 2 + CDC pipeline using
+                                Python &amp; SQL Server</div>
+                        </div>
+                        <div class="highlight-item reveal reveal-delay-4">
+                            <div class="hi-icon">📍</div>
+                            <div class="hi-text"><strong>Location</strong>Bengaluru, India · Open to remote &amp;
+                                on-site roles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const closeBtn = document.getElementById('closeProjectDetails');
-      if (closeBtn) {
-        closeBtn.addEventListener('click', closeProjectDetails);
-      }
+    <!-- SKILLS -->
+    <section class="skills" id="skills">
+        <div class="section-inner">
+            <div class="section-label reveal">Technical Skills</div>
+            <div class="section-title reveal">What I <span>Work With</span></div>
+            <div class="skills-grid">
+                <div class="skill-category reveal reveal-delay-1">
+                    <div class="skill-cat-label">Languages &amp; Databases</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag core">Python</span>
+                        <span class="skill-tag core">SQL (PostgreSQL, MySQL)</span>
+                        <span class="skill-tag">Microsoft SQL Server</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal reveal-delay-2">
+                    <div class="skill-cat-label">ETL &amp; Data Concepts</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag core">ETL Pipelines</span>
+                        <span class="skill-tag core">SCD Type 2</span>
+                        <span class="skill-tag core">CDC</span>
+                        <span class="skill-tag">Data Warehouse</span>
+                        <span class="skill-tag">Star Schema</span>
+                        <span class="skill-tag">SSIS (Learning)</span>
+                        <span class="skill-tag">Incremental Load</span>
+                        <span class="skill-tag">Rest APIs Integration</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal reveal-delay-3">
+                    <div class="skill-cat-label">SQL Expertise</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag core">Window Functions</span>
+                        <span class="skill-tag ">Stored procedures</span>
+                        <span class="skill-tag core">Joins</span>
+                        <span class="skill-tag">CTE</span>
+                        <span class="skill-tag core">Query Optimization</span>
+                        <span class="skill-tag">Indexing</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal reveal-delay-4">
+                    <div class="skill-cat-label">Python Libraries</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag core">Pandas</span>
+                        <span class="skill-tag ">Numpy</span>
+                        <span class="skill-tag ">Faker</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal reveal-delay-5">
+                    <div class="skill-cat-label">Analytics & BI</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag core">Power BI</span>
+                        <span class="skill-tag">Power Query</span>
+                        <span class="skill-tag">KPI Dashboards</span>
+                        <span class="skill-tag">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="skill-category reveal reveal-delay-6">
+                    <div class="skill-cat-label">Tools &amp; Practises</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git &amp; GitHub</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">Agile Methodology</span>
+                        <span class="skill-tag">Documentation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      const overlay = document.getElementById('projectDetailsOverlay');
-      if (overlay) {
-        overlay.addEventListener('click', (e) => {
-          if (e.target.id === 'projectDetailsOverlay') {
-            closeProjectDetails();
-          }
+    <!-- EXPERIENCE -->
+    <section class="experience" id="experience">
+        <div class="section-inner">
+            <div class="section-label reveal">Education &amp; Experience</div>
+            <div class="section-title reveal">My Professional <span>Journey</span></div>
+            <div class="timeline">
+                <!-- EDIT: fill in your actual internship details -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"><span class="dot-icon">💼</span></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <div class="tl-role">SQL &amp; ETL Developer Intern</div>
+                            <div class="tl-period">Aug 2025 – Oct 2025</div>
+                        </div>
+                        <div class="tl-company">Labmentix Edtech · Bengaluru · Paid Internship</div>
+                        <ul class="tl-points">
+                            <!-- EDIT: replace with your real bullet points -->
+                            <li>Developed and optimized SQL queries and stored procedures on SQL Server for data
+                                extraction and transformation workflows</li>
+                            <li>Assisted in building ETL pipelines to load and validate structured data from source
+                                systems into target databases</li>
+                            <li>Wrote Python scripts to automate repetitive data processing and cleansing tasks,
+                                reducing manual effort significantly</li>
+                            <li>Performed data validation and quality checks across pipeline stages to maintain data
+                                integrity standards</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"><span class="dot-icon">💼</span></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <div class="tl-role">Data Analyst Intern</div>
+                            <div class="tl-period">Jun 2024 – Aug 2024</div>
+                        </div>
+                        <div class="tl-company">Plasmid Innovation · Bengaluru · AICTE Internship</div>
+                        <ul class="tl-points">
+                            <!-- EDIT: replace with your real bullet points -->
+                            <li>Developed and optimized SQL queries and stored procedures on SQL Server for data
+                                extraction and transformation workflows</li>
+                            <li>Assisted in building ETL pipelines to load and validate structured data from source
+                                systems into target databases</li>
+                            <li>Wrote Python scripts to automate repetitive data processing and cleansing tasks,
+                                reducing manual effort significantly</li>
+                            <li>Performed data validation and quality checks across pipeline stages to maintain data
+                                integrity standards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="section-title reveal">My Educational <span>Journey</span></div>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot edu"><span class="dot-icon">🎓</span></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <div class="tl-role">Master of Computer Applications (MCA)</div>
+                            <div class="tl-period edu-tag">Sep 2023 – Nov 2025</div>
+                        </div>
+                        <!-- EDIT: university name and city -->
+                        <div class="tl-company">TJohn College Autonomus · Bengaluru · CGPA: 8.1</div>
+                        <ul class="tl-points">
+                            <li>Specialized in database management systems, data structures, and software engineering
+                                principles</li>
+                            <li>Completed coursework in Python programming, DBMS, operating systems, and software
+                                development lifecycle</li>
+                            <li>Graduated with 8.1 CGPA demonstrating consistent academic performance throughout the
+                                program
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot edu"><span class="dot-icon">🎓</span></div>
+                    <div class="timeline-content">
+                        <div class="tl-header">
+                            <div class="tl-role">Bachelor of Computer Applications (BCA)</div>
+                            <div class="tl-period edu-tag">Sep 2020 – Jul 2023</div>
+                        </div>
+                        <!-- EDIT: university name and city -->
+                        <div class="tl-company">RK University · Rajkot · CGPA: 7.1</div>
+                        <ul class="tl-points">
+                            <li>Specialized in database management systems, data structures, and software engineering
+                                principles</li>
+                            <li>Completed coursework in Python programming, DBMS, operating systems, and software
+                                development lifecycle</li>
+                            <li>Graduated with 7.1 CGPA demonstrating consistent academic performance throughout the
+                                program
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects" id="projects">
+        <div class="section-inner">
+            <div class="section-label reveal">Projects</div>
+            <div class="section-title reveal">Things I've <span>Built</span></div>
+            <div class="projects-grid">
+
+                <!-- PROJECT 1 — EDIT with your real project -->
+                <div class="project-card reveal reveal-delay-1">
+                    <div class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="project-img-placeholder">
+                            <div style="color:var(--accent);margin-bottom:8px;font-size:11px">▶ scd_pipeline.py</div>
+                            <div style="color:rgba(255,255,255,0.4)">def run_scd_type2(conn, df):</div>
+                            <div style="color:rgba(255,255,255,0.25);padding-left:12px">merge_query = """</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">MERGE dim_customer AS target</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">USING staging AS source...</div>
+                        </div>
+                        <div class="project-top-bar">
+                            <span class="project-icon-sm">⚙️</span>
+                            <div class="project-links">
+                                <!-- EDIT: your real GitHub repo link -->
+                                <a href="https://github.com/PriyamMaharana/scd-type2-pipeline" class="project-link"
+                                    target="_blank">GH</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-name">SCD Type 2 - Customer Dimension Implementation</div>
+                        <div class="project-desc">End-to-end ETL pipeline implementing SCD Type 2 logic in Python + SQL Server. 
+                            Classifies 1000+ records per batch into NEW / SCD2_CHANGE / SOFT_UPDATE / NO_CHANGE — preserving full 
+                            customer history with expire + insert dual operations, staging layer, and audit logging.</div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">SQL Server</span>
+                            <span class="stack-tag">SCD Type 2</span>
+                            <span class="stack-tag">Pandas</span>
+                            <span class="stack-tag">T-SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2 — EDIT or add your next project -->
+                <div class="project-card reveal reveal-delay-2">
+                    <div class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="project-img-placeholder">
+                            <div style="color:var(--accent);margin-bottom:8px;font-size:11px">▶ cdc_pipeline.py</div>
+                            <div style="color:rgba(255,255,255,0.4)">def run_cdc(conn, df):</div>
+                            <div style="color:rgba(255,255,255,0.25);padding-left:12px">orders_warehouse = """</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">SELECT name, is_cdc_enabled </div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">FROM sys.databases WHERE...</div>
+                        </div>
+                        <div class="project-top-bar">
+                            <span class="project-icon-sm">🏗️</span>
+                            <div class="project-links">
+                                <a href="https://github.com/PriyamMaharana/cdc-pipeline" class="project-link" target="_blank">GH</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-name">CDC Pipeline</div>
+                        <div class="project-desc">Near real-time incremental load pipeline using SQL Server's built-in Change Data Capture.
+                             Reads LSN-based change logs to apply only inserts, updates, and deletes — eliminating full table scans on 
+                             every run.</div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">SQL Server</span>
+                            <span class="stack-tag">CDC</span>
+                            <span class="stack-tag">Pandas</span>
+                            <span class="stack-tag">T-SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3 — EDIT with your real project -->
+                <div class="project-card reveal reveal-delay-1">
+                    <div class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="project-img-placeholder">
+                            <div style="color:var(--accent);margin-bottom:8px;font-size:11px">▶ ola_insights.pibx</div>
+                            <div style="color:rgba(255,255,255,0.4)">def get_ola_insights(conn, df):</div>
+                            <div style="color:rgba(255,255,255,0.25);padding-left:12px">ride_insights = """</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">SELECT  ride_insight AS rides</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">FROM sys.databases AS oladb...</div>
+                        </div>
+                        <div class="project-top-bar">
+                            <span class="project-icon-sm">🚖</span>
+                            <div class="project-links">
+                                <a href="https://github.com/PriyamMaharana/OLA_Insights" class="project-link"
+                                    target="_blank">GH</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-name">OLA Ride Data Pipeline & Analytics Platform</div>
+                        <div class="project-desc">End-to-end ETL pipeline ingesting real-time ride data via REST APIs into a SQL Server 
+                            star schema. Designed fact and dimension tables enabling analytical queries across 5M+ ride records. Built 5 
+                            Power BI dashboards tracking 10+ KPIs.</div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">SQL Server</span>
+                            <span class="stack-tag">Power BI</span>
+                            <span class="stack-tag">Rest APIs</span>
+                            <span class="stack-tag">Streamlit</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 4 — EDIT or add your next project -->
+                <div class="project-card reveal reveal-delay-2">
+                    <div class="project-img">
+                        <div class="project-img-overlay"></div>
+                        <div class="project-img-placeholder">
+                            <div style="color:var(--accent);margin-bottom:8px;font-size:11px">▶ airbnb_reporting.py</div>
+                            <div style="color:rgba(255,255,255,0.4)">def airbnb_price_insights(conn, df):</div>
+                            <div style="color:rgba(255,255,255,0.25);padding-left:12px">hotel_listing = """</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">MERGE hotels_airbnb as hotels</div>
+                            <div style="color:rgba(255,255,255,0.2);padding-left:24px">USING sys.databases WHERE...</div>
+                        </div>
+                        <div class="project-top-bar">
+                            <span class="project-icon-sm">📉</span>
+                            <div class="project-links">
+                                <a href="https://github.com/PriyamMaharana/Airbnb-Insights-Report" class="project-link" target="_blank">GH</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-name">Airbnb Listing Analytics & Price Insights</div>
+                        <div class="project-desc">Structured data warehouse from 50,000+ raw Airbnb records. Performance-tuned SQL 
+                            using window functions, CTEs, and subqueries uncovered pricing patterns showing a 23% premium over average 
+                            listings.</div>
+                        <div class="project-stack">
+                            <span class="stack-tag">Python</span>
+                            <span class="stack-tag">SQL Server</span>
+                            <span class="stack-tag">Power BI</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="certifications" id="certifications">
+        <div class="section-inner">
+            <div class="section-label reveal">Certifications</div>
+            <div class="section-title reveal">Credentials &amp; <span>Courses</span></div>
+            <div class="certs-grid">
+                <!-- EDIT: update with your real certs. Use "earned" or "inprogress" class on cert-status -->
+                <div class="cert-card reveal reveal-delay-1">
+                    <div class="cert-logo">☁️</div>
+                    <div class="cert-info">
+                        <div class="cert-name">Microsoft Azure Fundamentals (AZ-900)</div>
+                        <div class="cert-issuer">Microsoft · 2025</div>
+                        <span class="cert-status inprogress">In Progress</span>
+                    </div>
+                </div>
+                <div class="cert-card reveal reveal-delay-1">
+                    <div class="cert-logo">☁️</div>
+                    <div class="cert-info">
+                        <div class="cert-name">SQL Intermediate</div>
+                        <div class="cert-issuer">HackerRank · 2025</div>
+                        <span class="cert-status earned">Earned</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GITHUB STATS -->
+    <section class="github-section" id="github">
+        <div class="section-inner">
+            <div class="section-label reveal">Open Source</div>
+            <div class="section-title reveal">GitHub <span>Activity</span></div>
+            <div class="github-grid reveal">
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=PriyamMaharana&theme=default&hide_border=true&background=F8F9FC&stroke=E2E8F0&ring=1D4ED8&fire=F59E0B&currStreakLabel=1D4ED8" 
+                alt="GitHub Streak" loading="lazy"/>
+            </div>
+            <div class="github-streak reveal"></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+        <div class="section-inner">
+            <div class="section-label">Get In Touch</div>
+            <div class="section-title">Let's <span style="color:var(--accent)">Connect</span></div>
+            <div class="contact-sub">I'm actively looking for Junior Data Engineer and ETL Developer opportunities. Feel
+                free to reach out — I respond within 24 hours.</div>
+            <div class="contact-grid">
+                <div class="contact-links">
+                    <!-- EDIT: replace all values with your real contact info -->
+                    <a href="mailto:priyammaharana.data@gmail.com" class="contact-link reveal">
+                        <div class="cl-icon">✉️</div>
+                        <div>
+                            <div class="cl-label">Email</div>
+                            <div class="cl-val">priyammaharana.data@gmail.com</div>
+                        </div>
+                    </a>
+                    <a href="https://linkedin.com/in/priyammaharana" class="contact-link reveal reveal-delay-1"
+                        target="_blank">
+                        <div class="cl-icon" style="font-weight:700;font-size:13px;color:#3B82F6">in</div>
+                        <div>
+                            <div class="cl-label">LinkedIn</div>
+                            <div class="cl-val">linkedin.com/in/priyammaharana</div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/PriyamMaharana" class="contact-link reveal reveal-delay-2"
+                        target="_blank">
+                        <div class="cl-icon">⌥</div>
+                        <div>
+                            <div class="cl-label">GitHub</div>
+                            <div class="cl-val">github.com/PriyamMaharana</div>
+                        </div>
+                    </a>
+                    <a href="tel:+917091318244" class="contact-link reveal reveal-delay-3">
+                        <div class="cl-icon">📱</div>
+                        <div>
+                            <div class="cl-label">Phone</div>
+                            <div class="cl-val">+91 7091318244</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="resume-box reveal">
+                    <h3>My Resume</h3>
+                    <p>Want the full picture? Download my resume for a detailed overview of my skills, projects, and
+                        experience.</p>
+                    <!-- EDIT: keep resume.pdf in the same folder as this HTML -->
+                    <a href="Priyam_Maharana_Resume_SQL_ETL_Developer.pdf" class="btn-download" download>↓ &nbsp; Download Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <!-- EDIT: your name here -->
+        &copy; 2025 Priyam Maharana &nbsp;·&nbsp; Built with HTML, CSS &amp; JS &nbsp;·&nbsp; Hosted on GitHub Pages
+    </footer>
+
+    <script>
+        // ── SCROLL PROGRESS BAR ──
+        const bar = document.getElementById('progress-bar');
+        window.addEventListener('scroll', () => {
+            const st = window.scrollY, dh = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = (dh > 0 ? (st / dh * 100) : 0) + '%';
+        }, { passive: true });
+
+        // ── BACK TO TOP ──
+        const topBtn = document.getElementById('back-top');
+        window.addEventListener('scroll', () => {
+            topBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+
+        // ── SCROLL REVEAL ──
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        reveals.forEach(r => io.observe(r));
+
+        // ── ACTIVE NAV HIGHLIGHT ──
+        const sections = document.querySelectorAll('section[id]');
+        const navAs = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let cur = '';
+            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+            navAs.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+        }, { passive: true });
+
+        // ── DARK MODE ──
+        const themeBtn = document.getElementById('theme-toggle');
+        const root = document.documentElement;
+        let dark = localStorage.getItem('theme') === 'dark';
+        function applyTheme() {
+            root.setAttribute('data-theme', dark ? 'dark' : 'light');
+            themeBtn.textContent = dark ? '☀️' : '🌙';
+            // update github stats images for dark mode
+            document.querySelectorAll('.github-section img').forEach(img=>{
+                img.src=img.src.replace(dark?'default':'tokyonight',dark?'tokyonight':'default')
+                .replace(dark?'F8F9FC':'161B22',dark?'161B22':'F8F9FC')
+                .replace(dark?'475569':'8B949E',dark?'8B949E':'475569')
+                .replace(dark?'E2E8F0':'30363D',dark?'30363D':'E2E8F0');
+            });
+        }
+        applyTheme();
+        themeBtn.addEventListener('click', () => { dark = !dark; localStorage.setItem('theme', dark ? 'dark' : 'light'); applyTheme(); });
+
+        // ── HAMBURGER MENU ──
+        const ham = document.getElementById('hamburger');
+        const mob = document.getElementById('mobile-menu');
+        ham.addEventListener('click', () => {
+            const open = mob.classList.toggle('open');
+            const spans = ham.querySelectorAll('span');
+            spans[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+            spans[1].style.opacity = open ? '0' : '1';
+            spans[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
         });
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const overlay = document.getElementById('projectDetailsOverlay');
-        if (overlay && overlay.classList.contains('open')) {
-          closeProjectDetails();
+        function closeMobileMenu() {
+            mob.classList.remove('open');
+            ham.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = '1'; });
         }
-      }
-    });
-
-    // FIXED: Enhanced project handling with proper add/update logic
-    document.getElementById('addProject').addEventListener('click', () => {
-        if(!isAdmin()) {
-          alert('❌ Please sign in as admin to add projects.');
-          return;
-        }
-        
-        const title = document.getElementById('pTitle').value.trim();
-        const image = document.getElementById('pImage').value.trim();
-        const stack = document.getElementById('pStack').value.trim();
-        const githubLink = document.getElementById('pGithubLink').value.trim();
-        const description = document.getElementById('pDescription').value.trim();
-        const features = document.getElementById('pFeatures').value.trim();
-        const performance = document.getElementById('pPerformance').value.trim();
-        const records = document.getElementById('pRecords').value.trim();
-        const automation = document.getElementById('pAutomation').value.trim();
-        
-        if(!title || title.length < 3) {
-          showMessage('projectMessage', 'Project title must be at least 3 characters', 'error');
-          document.getElementById('pTitle').focus();
-          return;
-        }
-        
-        if(!stack) {
-          showMessage('projectMessage', 'Tech stack is required', 'error');
-          document.getElementById('pStack').focus();
-          return;
-        }
-      
-        if(!description || description.length < 20) {
-          showMessage('projectMessage', 'Description must be at least 20 characters', 'error');
-          document.getElementById('pDescription').focus();
-          return;
-        }
-      
-        if(image && !isValidUrl(image)) {
-          showMessage('projectMessage', 'Please enter a valid image URL', 'error');
-          document.getElementById('pImage').focus();
-          return;
-        }
-      
-        if(githubLink && !isValidUrl(githubLink)) {
-          showMessage('projectMessage', 'Please enter a valid GitHub URL', 'error');
-          document.getElementById('pGithubLink').focus();
-          return;
-        }
-        
-        const arr = loadJSON(LS.KEY_PROJECTS, []);
-        
-        // FIXED: Check if we're editing or adding
-        if (currentEditingProjectId) {
-          // Update existing project
-          const projectIndex = arr.findIndex(x => x.id === currentEditingProjectId);
-          
-          if (projectIndex === -1) {
-            showMessage('projectMessage', 'Project not found for update', 'error');
-            resetFormToAddMode();
-            return;
-          }
-
-          arr[projectIndex] = {
-            ...arr[projectIndex],
-            title,
-            description,
-            image,
-            stack: stack.split(',').map(x=>x.trim()).filter(Boolean),
-            githubLink: githubLink || '#',
-            features: features ? features.split(',').map(x=>x.trim()).filter(Boolean) : [],
-            metrics: {
-              performance: performance || "99.9%",
-              records: records || "1M+",
-              automation: automation || "100%"
-            },
-            updated: Date.now()
-          };
-          
-          try {
-            saveJSON(LS.KEY_PROJECTS, arr);
-            clearProjectForm();
-            resetFormToAddMode();
-            renderProjects();
-            showMessage('projectMessage', '✅ Project updated successfully!', 'success');
-          } catch (error) {
-            showMessage('projectMessage', '❌ Error updating project: ' + error.message, 'error');
-          }
-        } else {
-          // Add new project
-          const newP = {
-            id: cryptoRandom(),
-            title,
-            description,
-            image,
-            stack: stack.split(',').map(x=>x.trim()).filter(Boolean),
-            githubLink: githubLink || '#',
-            features: features ? features.split(',').map(x=>x.trim()).filter(Boolean) : [],
-            metrics: {
-              performance: performance || "99.9%",
-              records: records || "1M+",
-              automation: automation || "100%"
-            },
-            created: Date.now()
-          };
-          
-          try {
-            arr.unshift(newP);
-            saveJSON(LS.KEY_PROJECTS, arr);
-            clearProjectForm();
-            renderProjects();
-            showMessage('projectMessage', '✅ Project added successfully!', 'success');
-          } catch (error) {
-            showMessage('projectMessage', '❌ Error adding project: ' + error.message, 'error');
-          }
-        }
-    });
-
-    function clearProjectForm() {
-      document.getElementById('pTitle').value='';
-      document.getElementById('pImage').value='';
-      document.getElementById('pStack').value='';
-      document.getElementById('pGithubLink').value='';
-      document.getElementById('pDescription').value='';
-      document.getElementById('pFeatures').value='';
-      document.getElementById('pPerformance').value='';
-      document.getElementById('pRecords').value='';
-      document.getElementById('pAutomation').value='';
-    }
-
-    function resetFormToAddMode() {
-      currentEditingProjectId = null;
-      const addBtn = document.getElementById('addProject');
-      addBtn.textContent = '+ Add Project';
-    }
-
-    function isValidUrl(string) {
-      try {
-        new URL(string);
-        return true;
-      } catch (_) {
-        return false;
-      }
-    }
-
-    // FIXED: Simplified edit function
-    function editProject(id) {
-      if(!isAdmin()) {
-        alert('❌ Please sign in as admin to edit projects.');
-        return;
-      }
-      
-      const arr = loadJSON(LS.KEY_PROJECTS, []);
-      const p = arr.find(x => x.id === id);
-      if(!p) {
-        showMessage('projectMessage', 'Project not found', 'error');
-        return;
-      }
-
-      // Set edit mode
-      currentEditingProjectId = id;
-
-      // Fill the form
-      document.getElementById('pTitle').value = p.title || '';
-      document.getElementById('pImage').value = p.image || '';
-      document.getElementById('pStack').value = (p.stack || []).join(', ');
-      document.getElementById('pGithubLink').value = p.githubLink || '';
-      document.getElementById('pDescription').value = p.description || '';
-      document.getElementById('pFeatures').value = (p.features || []).join(', ');
-      document.getElementById('pPerformance').value = (p.metrics && p.metrics.performance) || '';
-      document.getElementById('pRecords').value = (p.metrics && p.metrics.records) || '';
-      document.getElementById('pAutomation').value = (p.metrics && p.metrics.automation) || '';
-
-      // Change button text
-      const addBtn = document.getElementById('addProject');
-      addBtn.textContent = 'Update Project';
-
-      showMessage('projectMessage', 'Edit mode: Make changes and click Update Project', 'success');
-    }
-    
-    window.deleteProject = function(id){
-      if(!isAdmin()) {
-        alert('❌ Please sign in as admin to delete projects.');
-        return;
-      }
-      
-      const arr = loadJSON(LS.KEY_PROJECTS, []);
-      const project = arr.find(x => x.id === id);
-      
-      if(!project) {
-        showMessage('projectMessage', 'Project not found', 'error');
-        return;
-      }
-      
-      if(!confirm(`Delete "${project.title}"?\nThis action cannot be undone.`)) return;
-      
-      try {
-        const filteredArr = arr.filter(x => x.id !== id);
-        saveJSON(LS.KEY_PROJECTS, filteredArr);
-        
-        // If we were editing this project, reset form
-        if (currentEditingProjectId === id) {
-          clearProjectForm();
-          resetFormToAddMode();
-        }
-        
-        renderProjects();
-        showMessage('projectMessage', '✅ Project deleted successfully!', 'success');
-      } catch (error) {
-        showMessage('projectMessage', '❌ Error deleting project: ' + error.message, 'error');
-      }
-    }
-    
-    document.getElementById('contactForm').addEventListener('submit', e => {
-      e.preventDefault();
-      
-      clearFieldErrors();
-      
-      const formData = {
-        name: document.getElementById('cname').value.trim(),
-        email: document.getElementById('cemail').value.trim(),
-        subject: document.getElementById('csubject').value.trim(),
-        message: document.getElementById('cmessage').value.trim()
-      };
-      
-      const errors = validateForm(formData);
-      
-      if(Object.keys(errors).length > 0) {
-        if(errors.name) showFieldError('cname', errors.name);
-        if(errors.email) showFieldError('cemail', errors.email);
-        if(errors.message) showFieldError('cmessage', errors.message);
-        return;
-      }
-      
-      const submitBtn = document.querySelector('.contact-submit');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-      
-      try {
-        const msg = {
-          id: cryptoRandom(), 
-          ...formData,
-          when: Date.now(),
-          read: false
-        };
-        
-        const arr = loadJSON(LS.KEY_MESSAGES, []);
-        arr.unshift(msg);
-        saveJSON(LS.KEY_MESSAGES, arr);
-        
-        e.target.reset();
-        
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Message Sent!';
-          setTimeout(() => {
-            submitBtn.textContent = originalText;
-          }, 2000);
-        }, 1000);
-        
-        if(isAdmin()) renderMessages();
-        
-      } catch (error) {
-        console.error('Error saving message:', error);
-        setTimeout(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Error - Try Again';
-          setTimeout(() => {
-            submitBtn.textContent = originalText;
-          }, 3000);
-        }, 1000);
-      }
-    });
-    
-    function renderMessages(){
-      const arr = loadJSON(LS.KEY_MESSAGES, []);
-      const list = document.getElementById('messagesList'); 
-      if(!list) return;
-      
-      list.innerHTML='';
-      
-      if(arr.length === 0) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = '<td colspan="6" class="muted" style="text-align:center;">No messages yet</td>';
-        list.appendChild(tr);
-        return;
-      }
-      
-      arr.forEach(m => {
-        const tr = document.createElement('tr');
-        tr.style.opacity = m.read ? '0.7' : '1';
-        tr.innerHTML = `
-          <td>${escapeHtml(m.name)}</td>
-          <td>${escapeHtml(m.email)}</td>
-          <td>${escapeHtml(m.subject || 'No subject')}</td>
-          <td class="small muted">${new Date(m.when).toLocaleString()}</td>
-          <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${escapeHtml(m.message)}">${escapeHtml(m.message)}</td>
-          <td>
-            <button class="ghost" onclick="markAsRead('${m.id}')" style="font-size:12px;padding:4px 8px;">${m.read ? 'Read' : 'Mark Read'}</button>
-          </td>`;
-        list.appendChild(tr);
-      });
-    }
-
-    window.markAsRead = function(id) {
-      if(!isAdmin()) return;
-      
-      const arr = loadJSON(LS.KEY_MESSAGES, []);
-      const message = arr.find(m => m.id === id);
-      if(message) {
-        message.read = !message.read;
-        saveJSON(LS.KEY_MESSAGES, arr);
-        renderMessages();
-      }
-    }
-    
-    function registerVisit(){
-      try {
-        const visits = loadJSON(LS.KEY_VISITS, []);
-        visits.unshift(Date.now());
-        if(visits.length > 1000) visits.length = 1000;
-        saveJSON(LS.KEY_VISITS, visits);
-        updateInsights();
-      } catch (error) {
-        console.error('Error registering visit:', error);
-      }
-    }
-    
-    const sectionStats = loadJSON(LS.KEY_SECTION_STATS, {home:0, about:0, projects:0, contact:0});
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if(en.isIntersecting){
-          const id = en.target.id;
-          if(['home','about','projects','contact'].includes(id)){
-            sectionStats[id] = (sectionStats[id] || 0) + 1;
-            try {
-              saveJSON(LS.KEY_SECTION_STATS, sectionStats);
-              updateInsights();
-            } catch (error) {
-              console.error('Error updating section stats:', error);
-            }
-          }
-        }
-      });
-    }, {threshold: 0.5});
-    
-    ['home','about','projects','contact'].forEach(i => {
-      const el = document.getElementById(i);
-      if(el) obs.observe(el);
-    });
-    
-    function updateInsights(){
-      try {
-        const visits = loadJSON(LS.KEY_VISITS, []);
-        const now = Date.now();
-        const last7 = visits.filter(t => t > now - 7*24*3600*1000).length;
-        const last30 = visits.filter(t => t > now - 30*24*3600*1000).length;
-        
-        const el1 = document.getElementById('insTotal'); 
-        if(el1) el1.textContent = visits.length;
-        
-        const el2 = document.getElementById('ins7'); 
-        if(el2) el2.textContent = last7;
-        
-        const el3 = document.getElementById('ins30'); 
-        if(el3) el3.textContent = last30;
-        
-        const stats = loadJSON(LS.KEY_SECTION_STATS, {home:0,about:0,projects:0,contact:0});
-        const most = Object.entries(stats).sort((a,b) => b[1]-a[1])[0];
-        const el4 = document.getElementById('insMost'); 
-        if(el4) el4.textContent = most ? `${most} (${most[1]})` : '—';
-        
-        const visCountEl = document.getElementById('visCount');
-        if(visCountEl) visCountEl.textContent = visits.length;
-        
-      } catch (error) {
-        console.error('Error updating insights:', error);
-      }
-    }
-    
-    const overlay = document.getElementById('adminOverlay');
-    const openAdminBtn = document.getElementById('openAdmin');
-    const closeAdminBtn = document.getElementById('closeAdmin');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const adminUser = document.getElementById('adminUser');
-    
-    function isAdmin(){ return sessionStorage.getItem('pf_admin_authed') === '1' }
-    
-    function showAdminOverlay(open){
-      if(open){
-        overlay.classList.add('open'); 
-        overlay.setAttribute('aria-hidden','false');
-        switchPanel('content');
-        renderAdminState();
-      } else {
-        overlay.classList.remove('open'); 
-        overlay.setAttribute('aria-hidden','true');
-        // Reset edit mode when closing admin
-        clearProjectForm();
-        resetFormToAddMode();
-      }
-    }
-    
-    openAdminBtn.addEventListener('click', () => {
-      if(isAdmin()){ 
-        showAdminOverlay(true); 
-        return; 
-      }
-      
-      const pw = prompt('Enter admin password:');
-      if(!pw) return;
-      
-      const stored = localStorage.getItem(LS.KEY_ADMIN_PASS) || btoa('admin123');
-      if(btoa(pw) === stored){
-        sessionStorage.setItem('pf_admin_authed','1');
-        showAdminOverlay(true);
-      } else {
-        alert('❌ Wrong password. Try again.');
-      }
-    });
-    
-    closeAdminBtn.addEventListener('click', () => showAdminOverlay(false));
-    
-    logoutBtn.addEventListener('click', () => {
-      if(confirm('Are you sure you want to logout?')) {
-        sessionStorage.removeItem('pf_admin_authed');
-        renderAdminState();
-        showAdminOverlay(false);
-      }
-    });
-    
-    function renderAdminState(){
-      const authed = isAdmin();
-      adminUser.textContent = authed ? 'Admin' : 'Not signed in';
-      logoutBtn.style.display = authed ? 'inline-block' : 'none';
-      closeAdminBtn.style.display = 'inline-block';
-      
-      document.querySelectorAll('[data-tab]').forEach(btn => {
-        const tabName = btn.getAttribute('data-tab');
-        if(tabName === 'content') {
-          btn.style.display = 'inline-block';
-        } else {
-          btn.style.display = authed ? 'inline-block' : 'none';
-        }
-        btn.classList.toggle('active', tabName === 'content');
-      });
-      
-      document.querySelectorAll('#panelContent > div').forEach(div => {
-        const panelType = div.getAttribute('data-panel');
-        div.style.display = panelType === 'content' ? 'block' : 'none';
-      });
-      
-      if(authed){
-        populateContentForm();
-        renderProjects();
-        renderMessages();
-        updateInsights();
-      }
-    }
-    
-    document.querySelectorAll('[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tabName = btn.getAttribute('data-tab');
-        
-        if(!isAdmin() && tabName !== 'content') {
-          return alert('❌ Please sign in as admin to access this section.');
-        }
-        
-        switchPanel(tabName);
-        
-        document.querySelectorAll('[data-tab]').forEach(tabBtn => {
-          tabBtn.classList.toggle('active', tabBtn.getAttribute('data-tab') === tabName);
-        });
-      });
-    });
-    
-    function switchPanel(name){
-      document.querySelectorAll('#panelContent > div').forEach(div => {
-        div.style.display = div.getAttribute('data-panel') === name ? 'block' : 'none';
-      });
-      
-      // Reset edit mode when switching away from projects panel
-      if (name !== 'projects') {
-        clearProjectForm();
-        resetFormToAddMode();
-      }
-    }
-    
-    function populateContentForm(){
-      const c = loadJSON(LS.KEY_CONTENT, defaultContent);
-      document.getElementById('editHomeTitle').value = c.homeTitle || '';
-      document.getElementById('editHomeTag').value = c.homeTag || '';
-      document.getElementById('editAboutBio').value = c.aboutBio || '';
-      document.getElementById('editAboutExp').value = c.aboutExp || '';
-      document.getElementById('editProfileURL').value = c.profileURL || '';
-    }
-    
-    document.getElementById('saveContent').addEventListener('click', () => {
-      if(!isAdmin()) {
-        alert('❌ Please sign in as admin to save content.');
-        return;
-      }
-      
-      const homeTitle = document.getElementById('editHomeTitle').value.trim();
-      const homeTag = document.getElementById('editHomeTag').value.trim();
-      const aboutBio = document.getElementById('editAboutBio').value.trim();
-      const aboutExp = document.getElementById('editAboutExp').value.trim();
-      const profileURL = document.getElementById('editProfileURL').value.trim();
-      
-      if(!homeTitle || homeTitle.length < 3) {
-        showMessage('contentMessage', 'Home title must be at least 3 characters', 'error');
-        document.getElementById('editHomeTitle').focus();
-        return;
-      }
-      
-      if(!homeTag || homeTag.length < 5) {
-        showMessage('contentMessage', 'Home tagline must be at least 5 characters', 'error');
-        document.getElementById('editHomeTag').focus();
-        return;
-      }
-      
-      if(!aboutBio || aboutBio.length < 50) {
-        showMessage('contentMessage', 'About bio must be at least 50 characters', 'error');
-        document.getElementById('editAboutBio').focus();
-        return;
-      }
-
-      if(profileURL && !isValidUrl(profileURL)) {
-        showMessage('contentMessage', 'Please enter a valid image URL', 'error');
-        document.getElementById('editProfileURL').focus();
-        return;
-      }
-      
-      const c = {
-        homeTitle,
-        homeTag,
-        aboutBio,
-        aboutExp,
-        profileURL
-      };
-      
-      try {
-        saveJSON(LS.KEY_CONTENT, c);
-        renderContent();
-        showMessage('contentMessage', '✅ Content saved successfully!', 'success');
-      } catch (error) {
-        showMessage('contentMessage', '❌ Error saving content: ' + error.message, 'error');
-      }
-    });
-    
-    document.getElementById('savePassword').addEventListener('click', () => {
-      if(!isAdmin()) {
-        alert('❌ Please sign in as admin to change password.');
-        return;
-      }
-      
-      const newpw = document.getElementById('setPassword').value.trim();
-      
-      if(!newpw) {
-        showMessage('settingsMessage', 'Please provide a new password', 'error');
-        return;
-      }
-      
-      if(newpw.length < 6) {
-        showMessage('settingsMessage', 'Password must be at least 6 characters', 'error');
-        return;
-      }
-      
-      try {
-        localStorage.setItem(LS.KEY_ADMIN_PASS, btoa(newpw));
-        document.getElementById('setPassword').value='';
-        showMessage('settingsMessage', '✅ Password updated successfully!', 'success');
-      } catch (error) {
-        showMessage('settingsMessage', '❌ Error updating password: ' + error.message, 'error');
-      }
-    });
-    
-    function setActiveNavLink() {
-      const currentHash = window.location.hash || '#home';
-      document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === currentHash) {
-          link.classList.add('active');
-        }
-      });
-    }
-
-    // Initialize everything
-    document.getElementById('year').textContent = new Date().getFullYear();
-    renderContent();
-    renderProjects();
-    updateInsights();
-    renderAdminState();
-    
-    window.addEventListener('load', () => {
-      registerVisit();
-      setActiveNavLink();
-    });
-    
-    window.addEventListener('hashchange', setActiveNavLink);
-    
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if(el) {
-          el.scrollIntoView({behavior:'smooth', block:'start'});
-          history.pushState(null, null, '#' + id);
-          setActiveNavLink();
-        }
-      })
-    });
-
-    window.addEventListener('error', function(e) {
-      console.error('Global error:', e.error);
-    });
-
-    window.addEventListener('unhandledrejection', function(e) {
-      console.error('Unhandled promise rejection:', e.reason);
-    });
-
-  </script>
+    </script>
 </body>
+
 </html>
